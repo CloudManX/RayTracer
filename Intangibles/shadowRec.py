@@ -1,5 +1,4 @@
-import material
-
+import numpy as np
 class ShadowRec():
 
     def __init__(self, hits = False, t = None, material = None, normal_func = None , ray = None):
@@ -9,6 +8,10 @@ class ShadowRec():
         self.mat = material
         self.getNormal = normal_func
         self.ray = ray
+        self.depth = 0
+        self.hitPoint = None
+        self.local_hit_point = np.array([0, 0, 0])
+
 
     # Get and set functions
     def hits(self):
@@ -38,5 +41,5 @@ class ShadowRec():
     def setGetNormal(self, func):
         self.getNormal = func
 
-    def getHitPoint(self):
-        return self.ray.getPoint(self.t)
+    def setHitPoint(self):
+        self.hitPoint = self.ray.getPoint(self.t)

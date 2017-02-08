@@ -2,6 +2,7 @@
 import numpy
 from RayTracer.Intangibles.shadowRec import ShadowRec
 
+
 class Plane(object):
 
     def __init__(self, point, normal, material, kEpsilon = 0.00001):
@@ -39,6 +40,7 @@ class Plane(object):
             shadowRec.setMat(self.material)
             shadowRec.setRay(ray)
             shadowRec.setGetNormal(self.getNormal)
+            shadowRec.setHitPoint()
         return shadowRec
 
     def shadow_hit(self, ray):
@@ -48,7 +50,7 @@ class Plane(object):
         Returns: tuple of (bool and t)
         """
         sr = self.hit(ray)
-        if (sr.hits()):
+        if sr.hits():
             return (True, sr.getTValue())
         else:
             return (False, 0)

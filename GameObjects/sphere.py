@@ -46,6 +46,11 @@ class Sphere:
                 sr.setRay(ray)
                 sr.setMat(self.material)
                 sr.setGetNormal(self.getNormal)
+                sr.setHitPoint()
+                x = sr.hitPoint[0] - self.center[0]
+                y = sr.hitPoint[1] - self.center[1]
+                z = sr.hitPoint[2] - self.center[2]
+                sr.local_hit_point = numpy.array([x/self.radius, y/self.radius, z/self.radius])
                 return sr
 
             t = (-1.0 * b + e) / denom
@@ -55,6 +60,11 @@ class Sphere:
                 sr.setRay(ray)
                 sr.setMat(self.material)
                 sr.setGetNormal(self.getNormal)
+                sr.setHitPoint()
+                x = sr.hitPoint[0] - self.center[0]
+                y = sr.hitPoint[1] - self.center[1]
+                z = sr.hitPoint[2] - self.center[2]
+                sr.local_hit_point = numpy.array([x/self.radius, y/self.radius, z/self.radius])
                 return sr
             return ShadowRec()
 

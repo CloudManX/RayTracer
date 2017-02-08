@@ -89,46 +89,46 @@ def draw(persp):
 
     print(hit_count, miss_count)
 
-# def drawJittered(persp):
-#     """ Draw the scene orthographically or in perspective regarding to
-#     boolean input persp with multi-jittering
-#     Args:
-#         persp: boolean value determines whether perspective projection
-#                is used
-#     Return: void
-#     """
-#     for row in range(viewPlane.vres):
-#         print(row)
-#         for col in range(viewPlane.hres):
-#             color = numpy.array([0, 0, 0])
-#             table = initTable(samplingSize)
-#             sampler = JitterSampler(samplingSize, table)
-#             for j in range(0, samplingSize):
-#                 for i in range(0, samplingSize):
-#                     offset = sampler.getOffset(i, j)
-#                     ray.origin = viewPlane.getPixelCenter(col, row, True, offset[0], offset[1])
-#                     if persp:
-#                         ray.origin = eyePoint
-#                         rayDir = viewPlane.getPerspectiveDir(col, row, 1, lookAt, eyePoint, up,
-#                                                              True, offset[0], offset[1])
-#                         ray.direction = rayDir / numpy.linalg.norm(rayDir)
-#
-#                     # shadowRec ordering
-#                     shadowRec_ = None
-#                     for obj in myObjects.list:
-#                         shadowRec = obj.hit(ray)
-#                         if(shadowRec_ == None):
-#                             if(shadowRec != None):
-#                                 shadowRec_ = shadowRec
-#                         else:
-#                             if(shadowRec != None and shadowRec_[0] > shadowRec[0]):
-#                                 shadowRec_ = shadowRec
-#
-#                     if (shadowRec_ != None):
-#                         xp = ray.getPoint(shadowRec_[0])
-#                         color += phongDiffuse(xp, shadowRec_[1](xp), shadowRec_[2])
-#             denom = samplingSize * samplingSize
-#             pix[col, (viewPlane.vres - 1 - row)] = (color[0]/denom, color[1]/denom, color[2]/denom)
+def drawJittered(persp):
+    """ Draw the scene orthographically or in perspective regarding to
+    boolean input persp with multi-jittering
+    Args:
+        persp: boolean value determines whether perspective projection
+               is used
+    Return: void
+    """
+    for row in range(viewPlane.vres):
+        print(row)
+        for col in range(viewPlane.hres):
+            color = numpy.array([0, 0, 0])
+            table = initTable(samplingSize)
+            sampler = JitterSampler(samplingSize, table)
+            for j in range(0, samplingSize):
+                for i in range(0, samplingSize):
+                    offset = sampler.getOffset(i, j)
+                    ray.origin = viewPlane.getPixelCenter(col, row, True, offset[0], offset[1])
+                    if persp:
+                        ray.origin = eyePoint
+                        rayDir = viewPlane.getPerspectiveDir(col, row, 1, lookAt, eyePoint, up,
+                                                             True, offset[0], offset[1])
+                        ray.direction = rayDir / numpy.linalg.norm(rayDir)
+
+                    # shadowRec ordering
+                    shadowRec_ = None
+                    for obj in myObjects.list:
+                        shadowRec = obj.hit(ray)
+                        if(shadowRec_ == None):
+                            if(shadowRec != None):
+                                shadowRec_ = shadowRec
+                        else:
+                            if(shadowRec != None and shadowRec_[0] > shadowRec[0]):
+                                shadowRec_ = shadowRec
+
+                    if (shadowRec_ != None):
+                        xp = ray.getPoint(shadowRec_[0])
+                        color += phongDiffuse(xp, shadowRec_[1](xp), shadowRec_[2])
+            denom = samplingSize * samplingSize
+            pix[col, (viewPlane.vres - 1 - row)] = (color[0]/denom, color[1]/denom, color[2]/denom)
 
 
 def initTable(samplingSize):

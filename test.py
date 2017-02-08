@@ -1,12 +1,9 @@
 import numpy as np
-import sys
-class sample(object):
-    def __init__(self, number):
-        self.number = number
+import math
+from PIL import Image
+a = np.array([1, 1, 1])
 
+x = 2 / math.pi
 
-mySample = sample(2)
-
-r = 215
-r = r if r <= 255 else 255
-print r
+im = Image.open('Texture/test.jpg')
+print im.size

@@ -1,4 +1,3 @@
-
 import numpy
 
 class JitterSampler:
@@ -59,4 +58,4 @@ class JitterSampler:
              j: vertical int counter for table
         Returns: a tuple holds x and y offsets
         """
-        return self.offsetTable[j * self.samplingSize + 1]
+        return self.offsetTable[j * self.samplingSize + i]
